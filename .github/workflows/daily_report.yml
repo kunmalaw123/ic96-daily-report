@@ -1,13 +1,11 @@
 name: IC96 Daily Report
 on:
-  schedule:
-    - cron: '0 1 * * 1-6'
   workflow_dispatch:
 jobs:
   send-report:
     runs-on: ubuntu-latest
     env:
-      LINE_TOKEN: ${{ secrets.LINE_CHANNEL_TOKEN }}
+      LINE_TOKEN: ${{ secrets.LINE_CHANNEL_TOKEN }}h
       LINE_GID:   ${{ secrets.LINE_GROUP_ID }}
       TKEY:       ${{ secrets.TRELLO_KEY }}
       TTOK:       ${{ secrets.TRELLO_TOKEN }}
