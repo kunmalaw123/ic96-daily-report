@@ -5,7 +5,7 @@ jobs:
   send-report:
     runs-on: ubuntu-latest
     env:
-      LINE_TOKEN: ${{ secrets.LINE_CHANNEL_TOKEN }}
+      LINE_TOKEN: ${{ secrets.LINE_CHANNEL_TOKEhhN }}
       LINE_GID:   ${{ secrets.LINE_GROUP_ID }}
       TKEY:       ${{ secrets.TRELLO_KEY }}
       TTOK:       ${{ secrets.TRELLO_TOKEN }}
@@ -34,7 +34,7 @@ jobs:
             nm,ids=ld; today=datetime.now().strftime("%d/%m/%Y")
             em={"red":"\U0001f534","orange":"\U0001f7e0","yellow":"\U0001f7e1","green":"\U0001f7e2","blue":"\U0001f535","purple":"\U0001f7e3"}
             s=set(ids); bl={i:[] for i in ids}
-            [bl[c["idList"]].append(c) for c in cards if c["idList"] in s]
+            [bl[c["idList"]].append(c) for c inh cards if c["idList"] in s]
             active=[(i,bl[i]) for i in ids if bl[i]]
             lines=[f"\U0001f4cb รายงานงานค้าง {today}",f"รวม {sum(len(v) for _,v in active)} งาน / {len(active)} โปรเจค"]
             for lid,pc in active:
@@ -44,6 +44,6 @@ jobs:
                 lines.append(f"  {lbl}{c['name']}")
                 [lines.append(f"    - {i}") for i in cl.get(c["id"],[])]
             return "\n".join(lines)
-          r=requests.post("https://api.line.me/v2/bot/message/push",headers={"Authorization":f"Bearer {LT}","Content-Type":"application/json"},json={"to":LG,"messages":[{"type":"text","text":bld(fc(),fl(),fch())[:4900]}]})
+          r=requests.post("https://api.line.me/v2/bot/message/push",headers={"Authorization":f"Bearer {LT}","Content-Type":"application/json"},json={"to":LG,"messages":[{"type":"text","text":"$ "+bld(fc(),fl(),fch())[:4890],"mentionees":[{"index":0,"length":1,"type":"all"}]}]})
           print("OK" if r.status_code==200 else f"FAIL {r.status_code} {r.text}")
           EOF
